@@ -1,13 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TodoList from  '../components/Todo/TodoList';
-import { toggleTodo } from '../actions';
+import { toggleTodo, VisibilityFilters } from '../actions';
 import Footer from './Footer';
 
 
+function filteredTodos(todos, currentFilter) {
+  switch(currentFilter) {
+    case VisibilityFilters.SHOW_ALL:
+      return todos;
+    case VisibilityFilters.SHOW_COMPLETED:
+      return (
+        todos.filter( filter => {
+          return filter.completed
+        })
+      )
+    case VisibilityFilters.SHOW_ACTIVE:
+      return (
+        todos.filter( filter => {
+          return !filter.completed
+        })
+      )
+  }
+}
+
 const mapStateToProps = state => {
   return {
-    todos: state.todos
+    todos: filteredTodos(state.todos, state.visibilityFilter)
   }
 }
 const mapDispatchToProps = dispatch => {
