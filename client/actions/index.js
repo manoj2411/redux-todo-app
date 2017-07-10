@@ -14,9 +14,10 @@ let nextTodoId = 0;
  * action creators
  */
 export const addTodo = text => {
+  nextTodoId = nextTodoId + 1
   return {
     type: 'TODO_ADD',
-    id: nextTodoId + 1,
+    id: nextTodoId,
     text: text
   }
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import TodoList from  '../components/Todo/TodoList';
 import { toggleTodo, VisibilityFilters } from '../actions';
 import Footer from './Footer';
-
+import TodoForm from './TodoForm'
 
 function filteredTodos(todos, currentFilter) {
   switch(currentFilter) {
@@ -45,17 +45,19 @@ class TodoPage extends React.Component {
     return(
       <div>
         <div className="row">
-          <div className="col-md-4 col-md-offset-4">
+          <div className="col-md-4 col-md-offset-3">
             <h2> Todo List </h2>
-              <TodoList
-                todos={todos}
-                onTodoClick={this.props.onTodoClick}
-              />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-4 col-md-offset-4">
-            <Footer />
+            <div className="row">
+                <TodoForm />
+            </div>
+            <br />
+            <div className="row">
+                <Footer />
+            </div>
+            <TodoList
+              todos={todos}
+              onTodoClick={this.props.onTodoClick}
+            />
           </div>
         </div>
       </div>
